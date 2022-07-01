@@ -16,7 +16,6 @@ const useCart = () => {
         })
         .then(res => res.json())
         .then(products => {
-            console.log(products);
             if(products.length){
                 // console.log("Saved Cart: ",savedCart);
                 const storedCart = [];
@@ -27,7 +26,6 @@ const useCart = () => {
                         // set quantity
                         const quantity = savedCart[key];
                         addedProduct.quantity = quantity;
-                        console.log(quantity);
                         storedCart.push(addedProduct);
                         // console.log(storedCart);
                     }

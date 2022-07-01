@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 import useCart from '../../hooks/useCart';
 import useProducts from '../../hooks/useProducts';
-import { clearTheCart } from '../../utilities/fakedb';
+import { clearTheCart, getStoredCart } from '../../utilities/fakedb';
 import './Shipping.css';
 
 const Shipping = () => {
@@ -15,7 +15,20 @@ const Shipping = () => {
     const [cart, setCart] = useCart(products);
 
     const onSubmit = data => {
+        const savedCart = getStoredCart();
+        data.order = savedCart;
         console.log(data);
+        fetch('http://localhost:5000/orders', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(res => res.json())
+        .then(result => {
+            console.log(result);
+        })
         navigate('/placeorder');
         setCart([]);
         clearTheCart();
