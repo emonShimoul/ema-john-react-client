@@ -17,22 +17,23 @@ const useCart = () => {
         .then(res => res.json())
         .then(products => {
             console.log(products);
-            // if(products.length){
-            //     // console.log("Saved Cart: ",savedCart);
-            //     const storedCart = [];
-            //     for(const key in savedCart){
-            //         const addedProduct = products.find(product => product.key == key);
-            //         // console.log(addedProduct);
-            //         if(addedProduct){
-            //             // set quantity
-            //             const quantity = savedCart[key];
-            //             addedProduct.quantity = quantity;
-            //             storedCart.push(addedProduct);
-            //             // console.log(storedCart);
-            //         }
-            //     }
-            //     setCart(storedCart);
-            // }
+            if(products.length){
+                // console.log("Saved Cart: ",savedCart);
+                const storedCart = [];
+                for(const key in savedCart){
+                    const addedProduct = products.find(product => product.key == key);
+                    // console.log(addedProduct);
+                    if(addedProduct){
+                        // set quantity
+                        const quantity = savedCart[key];
+                        addedProduct.quantity = quantity;
+                        console.log(quantity);
+                        storedCart.push(addedProduct);
+                        // console.log(storedCart);
+                    }
+                }
+                setCart(storedCart);
+            }
         })
         
     }, []);
