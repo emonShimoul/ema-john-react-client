@@ -8,7 +8,7 @@ import { clearTheCart, getStoredCart } from '../../utilities/fakedb';
 import './Shipping.css';
 
 const Shipping = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const {user} = useAuth();
     const navigate = useNavigate();
     const [products, setProducts] = useProducts();
@@ -27,7 +27,11 @@ const Shipping = () => {
         })
         .then(res => res.json())
         .then(result => {
-            console.log(result);
+            if(result.insertedId){
+                alert('Order processed successfully!!');
+                clearTheCart();
+                reset();
+            }
         })
         navigate('/placeorder');
         setCart([]);
