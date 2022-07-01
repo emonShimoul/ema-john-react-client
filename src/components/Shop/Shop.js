@@ -12,15 +12,15 @@ const Shop = () => {
     const [page, setPage] = useState(0);
     // product to be rendered on the UI
     const [displayProducts, setDisplayProducts] = useState([]);
-
+    const size = 10;
     useEffect(() => {
-        fetch('http://localhost:5000/products')
+        fetch(`http://localhost:5000/products?page=${page}&&size=${size}`)
             .then(res => res.json())
             .then(data => {
                 setProducts(data.products);
                 setDisplayProducts(data.products);
                 const count = data.count;
-                const pageNumber = Math.ceil(count/10);
+                const pageNumber = Math.ceil(count/size);
                 setPageCount(pageNumber);
             });
     }, []);
