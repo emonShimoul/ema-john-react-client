@@ -23,7 +23,7 @@ const Shop = () => {
                 const pageNumber = Math.ceil(count/size);
                 setPageCount(pageNumber);
             });
-    }, []);
+    }, [page]);
 
     useEffect(() => {
         if(products.length){
@@ -87,7 +87,7 @@ const Shop = () => {
                             className={ number === page ? 'selected' : '' }
                             key = {number}
                             onClick = {() => setPage(number)}
-                            >{number}</button> )
+                            >{number + 1}</button> )
                         }
                     </div>
                 </div>
